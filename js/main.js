@@ -65,15 +65,13 @@ var files = (function () {
         }
     };
     Singleton.defaultOptions = {
-        "about.txt": "Hi, my name is Neetesh Bhati, I am a software developer in Dubai, United Arab Emirtates. Please request CV to view the details.",
-		"experience.txt": "Sentient Labs FZ LLC\nSoftware Development Intern\n\nACM BPDC Student Chapter\nPresident\n\nBITS Pilani - Dubai\nCollege Representative",
-		"education.txt": "Birla Institute of Technology and Science – Dubai Campus\nBachelor of Engineering\nMajor: Computer Science\n\nDelhi Public School, Jodhpur\nHigh School\nMajor: Computer Science",
-		"skill.txt": "Programming Languages\nPython, C++, C, Java, JavaScript, HTML, CSS, SQL\n\nTechnical\nSoftware Development, Web Development, Data Science, Photo & Video Editing, Cyber Security & Networking, Systems Management, Graphics Design, Android Development\n\nSoftware\nAdobe Photoshop, Adobe Lightroom, Adobe Premier Pro, Adobe After Effects, Adobe Dreamweaver, Autodesk AutoCAD, Microsoft Office\n\nInterpersonal\nLeadership, Teamwork, Problem Solving, Decision Making, Organization, Communication, Public Speaking, Presentation, Management, Event Coordination, Proofreading, Writing",
-		"contact.txt": "neetesh@neeteshbhati.com",
-        "social_network_facebook.txt": "https://www.facebook.com/neeteshbhati",
-        "social_network_twitter.txt": "https://twitter.com/neeteshbhati",
-		"social_network_instagram.txt": "https://www.instagram.com/neeteshbhati/",
-		"social_network_linkedin.txt": "https://www.linkedin.com/in/neeteshbhati/"
+        "about.txt": "Hi, my name is Neetesh Bhati, I am a software developer in Dubai, United Arab Emirates.",
+        "experience.txt": "ESRI\nSoftware Engineer II\n\nESRI\nSoftware Engineer I\n\nSentient Labs\nIntern",
+        "education.txt": "Birla Institute of Technology and Science – Dubai Campus\nMaster of Engineering\nMajor: Software Systems\n\nBirla Institute of Technology and Science – Dubai Campus\nBachelor of Engineering\nMajor: Computer Science\n\nDelhi Public School, Jodhpur\nHigh School\nMajor: Computer Science",
+        "skill.txt": "Technical\nPython, C++, C#, C, JavaScript, Java, Azure, AWS, Docker, Kubernetes, Linux, Git\n\nInterpersonal\nLeadership, Teamwork, Problem Solving, Decision Making, Organization, Communication",
+        "contact.txt": "neetesh@neeteshbhati.com",
+        "social_network_instagram.txt": "https://www.instagram.com/neeteshbhati/",
+        "social_network_linkedin.txt": "https://www.linkedin.com/in/neeteshbhati/"
     };
     return {
         getInstance: function (options) {
@@ -87,23 +85,23 @@ var main = (function () {
 
     /**
      * Aux functions
-     */	
-	
+     */
+
     var isUsingIE = window.navigator.userAgent.indexOf("MSIE ") > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./);
 
     var ignoreEvent = function (event) {
         event.preventDefault();
         event.stopPropagation();
     };
-    
+
     var scrollToBottom = function () {
         window.scrollTo(0, document.body.scrollHeight);
     };
-    
+
     var isURL = function (str) {
         return (str.startsWith("http") || str.startsWith("www")) && str.indexOf(" ") === -1 && str.indexOf("\n") === -1;
     };
-    
+
     /**
      * Model
      */
@@ -165,7 +163,7 @@ var main = (function () {
         this.output.innerHTML += "<span class=\"prompt-color\">" + this.completePrompt + "</span> " + command + "<br/>";
     };
 
-    Terminal.prototype.init = function () {        
+    Terminal.prototype.init = function () {
         this.cmdLine.disabled = true;
         this.cmdLine.addEventListener("keydown", function (event) {
             if (event.which === 13 || event.keyCode === 13) {
@@ -187,17 +185,17 @@ var main = (function () {
     Terminal.makeElementAppear = function (element) {
         element.style.opacity = 1;
         element.style.transform = "translateX(0)";
-    };    
+    };
 
     Terminal.prototype.lock = function () {
         this.exec();
         this.cmdLine.blur();
-        this.cmdLine.disabled = true;        
+        this.cmdLine.disabled = true;
     };
 
     Terminal.prototype.unlock = function () {
         this.cmdLine.disabled = false;
-        this.prompt.textContent = this.completePrompt;        
+        this.prompt.textContent = this.completePrompt;
         scrollToBottom();
         this.focus();
     };
@@ -210,7 +208,7 @@ var main = (function () {
             if (cmdComponents[0].toLowerCase() === cmds.CAT.value) {
                 if (cmdComponents.length === 1) {
                     cmdComponents[1] = "";
-                }                
+                }
                 for (var file in files.getInstance()) {
                     if (file.startsWith(cmdComponents[1].toLowerCase())) {
                         possibilities.push(cmds.CAT.value + " " + file);
